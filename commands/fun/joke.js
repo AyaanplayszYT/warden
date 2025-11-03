@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const colors = require('../../config/colors.json');
+const logger = require('../../utils/logger');
 
 module.exports = {
     data: {
@@ -7,23 +8,31 @@ module.exports = {
         description: 'Tells a random joke.',
         aliases: [],
         cooldown: 5,
+        options: [],
     },
-    async execute(message, args) {
+    async execute(context, args) {
         try {
-            // Using a free, no-key-required API for jokes
             const response = await fetch('https://official-joke-api.appspot.com/random_joke');
             const jokeData = await response.json();
-
-            const jokeEmbed = new EmbedBuilder()
-                .setColor(colors.info)
-                .setTitle(jokeData.setup)
-                .setDescription(jokeData.punchline);
-            
-            message.channel.send({ embeds: [jokeEmbed] });
-
+                const jokeEmbed = new EmbedBuilder()
+                    .setColor(colors.info || '#5865F2')
+                    .setTitle('😂 Joke')
+                    .addFields(
+                        { name: 'Setup', value: jokeData.setup },
+                        { name: 'Punchline', value: jokeData.punchline }
+                    )
+                    .setFooter({ text: 'Powered by Warden' })
+                    .setTimestamp();
+            if (context.channel?.send) {
+                await context.channel.send({ embeds: [jokeEmbed] });
+            } else if (context.isChatInputCommand) {
+                await context.reply({ embeds: [jokeEmbed] });
+            }
+            logger.info(`Joke command used by ${(context.author?.tag || context.user?.tag)}`);
         } catch (error) {
-            console.error('Joke API failed:', error);
-            message.reply('Sorry, I couldn\'t think of a joke right now.');
+            logger.error('Joke API failed:', error);
+            if (context.reply) return context.reply('Sorry, I couldn\'t think of a joke right now.');
+            if (context.isChatInputCommand) return context.reply({ content: 'Sorry, I couldn\'t think of a joke right now.', ephemeral: true });
         }
     },
 };

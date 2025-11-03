@@ -14,6 +14,7 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
     ],
+    partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
 
 // Command handling
