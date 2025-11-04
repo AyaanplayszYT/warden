@@ -6,6 +6,9 @@ module.exports = {
 	once: true,
 	execute(client) {
 		logger.info(`Ready! Logged in as ${client.user.tag}`);
-		client.user.setActivity('Watching over the server!');
+		client.user.setPresence({
+			status: 'idle',
+			activities: [{ name: 'be a good boy or else tung tung will come to ur door', type: 0 }]
+		});
 	},
 };

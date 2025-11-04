@@ -42,16 +42,22 @@ module.exports = {
         });
         if (!helpText) helpText = 'No commands available.';
         const helpEmbed = new EmbedBuilder()
-            .setColor(colors.info || '#5865F2')
-            .setTitle('📖 Warden Bot Help')
-            .setDescription(helpText.trim())
-            .setFooter({ text: 'Use /command or !command | Powered by Warden' })
-            .setTimestamp();
+                .setColor('#7F7FD5') // Gradient-like color
+                .setTitle('📖 Warden Bot Commands')
+                .setDescription('Welcome to **Warden**! Here are all the commands you can use:\n\n' + helpText.trim())
+                .setThumbnail('https://cdn.discordapp.com/icons/1176892275536695296/warden.png')
+                .setFooter({ text: 'Use /command or !command | Made By Mistiz911' })
+                .setTimestamp();
         logger.info(`Help command used by ${(context.author?.tag || context.user?.tag)}`);
         if (context.channel?.send) {
             await context.channel.send({ embeds: [helpEmbed] });
         } else if (context.isChatInputCommand) {
-            await context.reply({ embeds: [helpEmbed] });
+            // For interactions, use followUp to send as a new message, not a reply
+            if (context.followUp) {
+                await context.followUp({ embeds: [helpEmbed] });
+            } else {
+                await context.reply({ embeds: [helpEmbed] });
+            }
         }
     },
 };

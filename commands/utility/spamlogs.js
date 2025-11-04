@@ -20,9 +20,10 @@ module.exports = {
         }
         let desc = logs.map(log => `**${log.type.toUpperCase()}** | ${log.user} (${log.userId}) | #${log.channel} | ${log.content ? log.content.substring(0, 50) : ''} | ${log.time}`).join('\n');
         const embed = new EmbedBuilder()
-            .setColor(colors.info || '#5865F2')
-            .setTitle('Recent Spam Logs')
-            .setDescription(desc)
+            .setColor('#FFA500')
+            .setTitle('🚨 Recent Spam Logs')
+            .setDescription('Here are the latest spam detections and actions:\n\n' + desc)
+            .setFooter({ text: 'Powered by Warden | Made By Mistiz911' })
             .setTimestamp();
         logger.info(`Spamlogs command used by ${(context.author?.tag || context.user?.tag)}`);
         if (context.channel?.send) {
