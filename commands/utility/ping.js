@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+const colors = require('../../config/colors.json');
 const logger = require('../../utils/logger');
 module.exports = {
     data: {

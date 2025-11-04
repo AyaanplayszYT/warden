@@ -1,7 +1,4 @@
 {
-  "prefix": "!",
-  "ownerId": "930685257206861935",
-  "welcomeChannelId": "YOUR_WELCOME_CHANNEL_ID",
-  "autoRoleId": "YOUR_AUTO_ROLE_ID",
-  "spamLogsChannelId": "1434941238120812574"
+  "prefix": "/",
+  "ownerId": "930685257206861935"
 }

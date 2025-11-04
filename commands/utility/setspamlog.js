@@ -16,7 +16,7 @@ module.exports = {
         try {
             logChannels = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         } catch (e) {
-            logChannels = { modLog: '', spamLog: '', imageLog: '' };
+            logChannels = { modLog: '', spamLog: '' };
         }
         const currentId = context.channel?.id || context.channelId;
         if (logChannels.spamLog === currentId) {
