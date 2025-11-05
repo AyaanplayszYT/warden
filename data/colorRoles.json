@@ -1,0 +1,31 @@
+{
+  "messageId": "1435335837398073419",
+  "channelId": "1435325802433740916",
+  "guildId": "1176892275536695296",
+  "roles": [
+    {
+      "name": "Red",
+      "emoji": "🟥"
+    },
+    {
+      "name": "Blue",
+      "emoji": "🟦"
+    },
+    {
+      "name": "Green",
+      "emoji": "🟩"
+    },
+    {
+      "name": "Yellow",
+      "emoji": "🟨"
+    },
+    {
+      "name": "Purple",
+      "emoji": "🟪"
+    },
+    {
+      "name": "Orange",
+      "emoji": "🟧"
+    }
+  ]
+}
