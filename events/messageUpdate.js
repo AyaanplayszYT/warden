@@ -24,6 +24,17 @@ module.exports = {
                         { name: 'After', value: newMessage.content ? newMessage.content.substring(0, 1024) : 'None' }
                     )
                     .setTimestamp();
+                // Add attachment info if present (old or new)
+                const allAttachments = [];
+                if (oldMessage.attachments && oldMessage.attachments.size > 0) {
+                    allAttachments.push(...oldMessage.attachments.map(att => `[${att.name}](${att.url})`));
+                }
+                if (newMessage.attachments && newMessage.attachments.size > 0) {
+                    allAttachments.push(...newMessage.attachments.map(att => `[${att.name}](${att.url})`));
+                }
+                if (allAttachments.length > 0) {
+                    embed.addFields({ name: 'Attachments', value: allAttachments.join('\n') });
+                }
                 if (spamChannel) {
                     spamChannel.send({ embeds: [embed] });
                 }

@@ -35,6 +35,11 @@ module.exports = {
                         { name: 'Content', value: logEntry.content ? logEntry.content.substring(0, 1024) : 'None' }
                     )
                     .setTimestamp();
+                // Add attachment info if present
+                if (message.attachments && message.attachments.size > 0) {
+                    const attachmentLinks = message.attachments.map(att => `[${att.name}](${att.url})`).join('\n');
+                    embed.addFields({ name: 'Attachments', value: attachmentLinks });
+                }
                 if (spamChannel) {
                     spamChannel.send({ embeds: [embed] });
                 }

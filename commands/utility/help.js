@@ -23,7 +23,7 @@ module.exports = {
             if (cmd.data && typeof cmd.execute === 'function') {
                 if (["ban","kick","mute","warn"].includes(cmd.data.name)) {
                     categories.Moderation.push(cmd);
-                } else if (["ping","serverinfo","userinfo","help","modlogs","spamlogs","setmodlog","setspamlog"].includes(cmd.data.name)) {
+                } else if (["ping","serverinfo","userinfo","help","modlogs","spamlogs","setmodlog","setspamlog","purge"].includes(cmd.data.name)) {
                     categories.Utility.push(cmd);
                 } else if (["joke","avatar"].includes(cmd.data.name)) {
                     categories.Fun.push(cmd);
